@@ -6,16 +6,16 @@ Funfit Zumba Application
 
 Tools/Technologies Used:
 
-Eclipse
-Java
-HTML/CSS
-JDBC
-JSP
-Servlets
-MySQL
-Apache Tomcat
-Maven
-Git
-GitHub
+1. Eclipse
+2. Java
+3. HTML/CSS
+4. JDBC
+5. JSP
+6. Servlets
+7. MySQL
+8. Apache Tomcat
+9. Maven
+10. Git
+11. GitHub
 
 Source Code and Screenshots are included within the repository.
