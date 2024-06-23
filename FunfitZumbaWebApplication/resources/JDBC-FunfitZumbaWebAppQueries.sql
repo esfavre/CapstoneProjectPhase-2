@@ -29,26 +29,26 @@ describe Batch;
 describe Participant;
 
 insert into Batch
-	(bid, batch_group, batch_name, batch_date_time)
+	(batch_group, batch_name, batch_date_time)
 	Values
-	(1, 'Morning', 'Zumba', '2024-06-17 08:00:00'),
-	(2, 'Evening', 'Zumba', '2024-06-17 20:00:00'),
-	(3, 'Morning', 'Zumba Gold', '2024-06-18 08:00:00'),
-	(4, 'Evening', 'Zumba Gold', '2024-06-18 20:00:00'),
-	(5, 'Morning', 'Zumba', '2024-06-19 08:00:00'),
-	(6, 'Evening', 'Zumba', '2024-06-19 20:00:00')
+	('Morning', 'Zumba', '2024-06-17 08:00:00'),
+	('Evening', 'Zumba', '2024-06-17 20:00:00'),
+	('Morning', 'Zumba Gold', '2024-06-18 08:00:00'),
+	('Evening', 'Zumba Gold', '2024-06-18 20:00:00'),
+	('Morning', 'Zumba', '2024-06-19 08:00:00'),
+	('Evening', 'Zumba', '2024-06-19 20:00:00')
 ;
 
 insert into Participant
-	(pid, name, phone, email, bid)
+	(name, phone, email, bid)
 	Values
-	(100, 'King Rauru', '999-548-4545', 'krauru@zonaisecretstones.com', 3),
-	(101, 'Queen Sonia', '999-415-5789', 'qsonia@zonaisecretstones.com', 3),
-	(102, 'Mineru', '999-214-4576', 'mineru@zonaisecretstones.com', 4),
-	(103, 'Sidon', '157-446-4657', 'sidon@zorasdomain.com', 1),
-	(104, 'Tulin', '648-478-4541', 'tulin@ritovillage.com', 1),
-	(105, 'Riju', '697-524-5415', 'riju@gerudotown.com', 2),
-	(106, 'Yunobo', '245-448-6984', 'yunobo@goroncity.com', 2)	
+	('King Rauru', '999-548-4545', 'krauru@zonaisecretstones.com', 3),
+	('Queen Sonia', '999-415-5789', 'qsonia@zonaisecretstones.com', 3),
+	('Mineru', '999-214-4576', 'mineru@zonaisecretstones.com', 4),
+	('Sidon', '157-446-4657', 'sidon@zorasdomain.com', 1),
+	('Tulin', '648-478-4541', 'tulin@ritovillage.com', 1),
+	('Riju', '697-524-5415', 'riju@gerudotown.com', 2),
+	('Yunobo', '245-448-6984', 'yunobo@goroncity.com', 2)	
 ;
 
 show databases;

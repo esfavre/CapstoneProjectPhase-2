@@ -8,15 +8,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class ParticipantController
+ * Servlet implementation class DeleteParticipantController
  */
-public class ParticipantController extends HttpServlet {
+public class DeleteParticipantController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ParticipantController() {
+    public DeleteParticipantController() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -72,25 +72,27 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h2>Add New Participant</h2>
+        <h2>Add New Batch</h2>
         <br>
   <div class="bs-example" data-example-id="basic-forms">
-    <form action="addParticipant" method="post">
+    <form action="addBatch" method="post">
    	  <div class="form-group">
-        <label for="participantName">Participant Name</label>
-        <input type="text" name="participantName" class="form-control" id="participantName" placeholder="Participant Name" required>
+        <label for="batch_group">Batch Group</label>
+        <select class="form-control" name="batch_group">
+		  <option>Morning</option>
+		  <option>Evening</option>
+		</select>
       </div>
       <div class="form-group">
-        <label for="participantPhone">Participant Phone Number</label>
-        <input type="text" name="participantPhone" class="form-control" id="participantPhone" placeholder="Participant Phone" required>
+        <label for="batch_name">Batch Name</label>
+        <select class="form-control" name="batch_name">
+		  <option>Zumba</option>
+		  <option>Zumba Gold</option>
+		</select>
       </div>
       <div class="form-group">
-        <label for="participantEmail">Participant Email Address</label>
-        <input type="email" name="participantEmail" class="form-control" id="participantEmail" placeholder="Participant Email" required>
-      </div>
-      <div class="form-group">
-        <label for="bid">Batch ID</label>
-        <input type="number" name="bid" class="form-control" id="bid" placeholder="Batch ID" required>
+        <label for="batch_date_time">Batch Date & Time</label>
+        <input type="datetime-local" name="batch_date_time" class="form-control" id="batch_date_time" placeholder="batch_date_time">
       </div>
       <br>
       <button type="submit" class="btn btn-default">Submit</button>

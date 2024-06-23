@@ -3,7 +3,6 @@
   <groupId>com.funfit</groupId>
   <artifactId>FunfitZumbaWebApplication</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
   <name>Funfit Zumba Web Application</name>
   <description>Capstone Project for Phase 2</description>
   <dependencies>
