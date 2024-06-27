@@ -7,10 +7,10 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="./resources/funfitzumbafavicon.ico">
+    <link rel="icon" href="">
     <link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/navbar/">
 
-    <title>Funfit Zumba Admin Page</title>
+    <title>Add Participant</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/3.4/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +35,6 @@
   <body>
 
      <div class="container">
-
       <!-- Static navbar -->
       <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -55,14 +54,14 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Batches <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="AddBatch.html">Add Batch</a></li>
-                  <li><a href="#">Current Batches</a></li>
+                  <li><a href="Batches.jsp">Batches</a></li>
                 </ul>
               </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Participants <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="AddParticipant.html">Add Participant</a></li>
-                  <li><a href="#">Current Participants</a></li>
+                  <li><a href="Participants.jsp">Participants</a></li>
                 </ul>
               </li>
             </ul>
@@ -75,7 +74,7 @@
         <h2>Add New Participant</h2>
         <br>
   <div class="bs-example" data-example-id="basic-forms">
-    <form action="addParticipant" method="post">
+    <form action="Participant" method="post">
    	  <div class="form-group">
         <label for="participantName">Participant Name</label>
         <input type="text" name="participantName" class="form-control" id="participantName" placeholder="Participant Name" required>
@@ -87,10 +86,6 @@
       <div class="form-group">
         <label for="participantEmail">Participant Email Address</label>
         <input type="email" name="participantEmail" class="form-control" id="participantEmail" placeholder="Participant Email" required>
-      </div>
-      <div class="form-group">
-        <label for="bid">Batch ID</label>
-        <input type="number" name="bid" class="form-control" id="bid" placeholder="Batch ID" required>
       </div>
       <br>
       <button type="submit" class="btn btn-default">Submit</button>

@@ -27,13 +27,13 @@ public interface FunfitDaoInterface {
 //	
 //	public List<Participant> findParticipantsByBatchId(int bid) throws SQLException; 
 //	
-	public void updateBatch(Batch batch);
+	public int updateBatch(Batch batch);
 //	
-	public void updateParticipant(Participant participant);
+	public int updateParticipant(Participant participant);
 //	
-	public void deleteBatch(int bid);
+	public int deleteBatch(int bid);
 //	
-	public void deleteParticipant(int pid);
+	public int deleteParticipant(int pid);
 	
 	public void connectToDatabase();
 	

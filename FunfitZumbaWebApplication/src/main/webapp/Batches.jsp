@@ -1,7 +1,15 @@
-
-<!doctype html>
-<html lang="en">
-  <head>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.funfit.dao.*"%>
+<%@page import="com.funfit.model.*"%>
+<%@page import="com.funfit.controller.*"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.util.List"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +23,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/3.4/dist/css/bootstrap.min.css" rel="stylesheet">
-
+	
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="https://getbootstrap.com/docs/3.4/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
@@ -32,10 +40,10 @@
       <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
     <![endif]-->
   </head>
+<body>
 
-  <body>
+<div class="container">
 
-    <div class="container">
       <!-- Static navbar -->
       <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -52,7 +60,7 @@
             <ul class="nav navbar-nav">
               
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Batches <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Batches<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="AddBatch.html">Add Batch</a></li>
                   <li><a href="Batches.jsp">Batches</a></li>
@@ -69,40 +77,63 @@
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </nav>
-
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>Welcome, Admin!</h1>
-        <h2>Add Batches or Participants Here</h2>
-        <br>
-        <p>
-          <a class="btn btn-lg btn-primary" href="AddBatch.html" role="button">Add Batch &raquo;</a>
-          &nbsp;
-          &nbsp;
-          <a class="btn btn-lg btn-primary" href="AddParticipant.html" role="button">Add Participant &raquo;</a>
-        </p>
-        <br>
-        <h2>Manage Batches or Participants Here</h2>
-        <br>
-        <p>
-        <a class="btn btn-lg btn-primary" href="Batches.jsp" role="button">Batches &raquo;</a>
-          &nbsp;
-          &nbsp;
-          <a class="btn btn-lg btn-primary" href="Participants.jsp" role="button">Participants &raquo;</a>
-        </p>
-      </div>
-
-    </div> <!-- /container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+      
+  <h2 id="tables-hover-rows">List of Zumba Batches</h2>
+  <br>
+  <div class="bs-example" data-example-id="hoverable-table">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Batch ID (bid)</th>
+          <th>Batch Group</th>
+          <th>Batch Name</th>
+          <th>Batch Date and Time</th>
+          <th>Delete/Update</th>
+        </tr>
+      </thead>
+      <tbody>
+      	<%
+      	JdbcFunfitDao dao = new JdbcFunfitDao();
+      	List<Batch> batches = new ArrayList<Batch>();
+      	batches = dao.getAllBatches();
+      	DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("E, MMM dd yyyy");
+		DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
+		String formatedDate = "";
+      	
+      	if(batches.size() > 0){
+   			for(Batch batch : batches){
+   				formatedDate = batch.getBatch_Date_Time().format(dateFormat) + " " + batch.getBatch_Date_Time().format(timeFormat);
+   				%>
+   				<tr>
+   				<th scope="row"><%= batch.getBid() %></th>
+   				<td><%= batch.getBatch_Group() %></td>
+   				<td><%= batch.getBatch_Name() %></td>
+   				<td><%= formatedDate %></td>
+   				<td><a href="DeleteBatch?id=<%= batch.getBid() %>">DELETE</a> | <a href="Update">UPDATE</a></td>
+   				</tr> 
+   				
+   			<%
+   			}
+   			
+      	} else {
+			%>
+			<tr>
+				<td>No Batches Present></td>
+			</tr>
+			
+		<% 
+		}%>
+      
+  </tbody>
+  </table>  
+  </div><!-- /example -->
+  <figure class="highlight"><pre>
+  </div> <!-- /container -->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="https://getbootstrap.com/docs/3.4/dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="https://getbootstrap.com/docs/3.4/assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
-</html>
 
+</body>
+</html>

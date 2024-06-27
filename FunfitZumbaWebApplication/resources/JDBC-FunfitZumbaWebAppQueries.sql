@@ -17,7 +17,7 @@ create table Batch(
 create table Participant(
 	pid int PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	name varchar(256) NOT NULL,
-	phone varchar(16),
+	phone varchar(16) NOT NULL,
 	email varchar(256) NOT NULL,
 	bid int,
 	CONSTRAINT fk_participant FOREIGN KEY (bid)

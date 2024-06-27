@@ -7,10 +7,10 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="./resources/funfitzumbafavicon.ico">
+    <link rel="icon" href="">
     <link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/navbar/">
 
-    <title>Funfit Zumba Admin Page</title>
+    <title>Add Batch</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/3.4/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +35,6 @@
   <body>
 
      <div class="container">
-
       <!-- Static navbar -->
       <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -55,14 +54,14 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Batches <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="AddBatch.html">Add Batch</a></li>
-                  <li><a href="#">Current Batches</a></li>
+                  <li><a href="Batches.jsp">Batches</a></li>
                 </ul>
               </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Participants <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="AddParticipant.html">Add Participant</a></li>
-                  <li><a href="#">Current Participants</a></li>
+                  <li><a href="Participants.jsp">Participants</a></li>
                 </ul>
               </li>
             </ul>
@@ -75,24 +74,24 @@
         <h2>Add New Batch</h2>
         <br>
   <div class="bs-example" data-example-id="basic-forms">
-    <form action="addBatch" method="post">
+    <form action="AddBatch" method="post">
    	  <div class="form-group">
-        <label for="batch_group">Batch Group</label>
-        <select class="form-control" name="batch_group">
+        <label for="batchGroup">Batch Group</label>
+        <select class="form-control" name="batchGroup" required>
 		  <option>Morning</option>
 		  <option>Evening</option>
 		</select>
       </div>
       <div class="form-group">
-        <label for="batch_name">Batch Name</label>
-        <select class="form-control" name="batch_name">
+        <label for="batchName">Batch Name</label>
+        <select class="form-control" name="batchName" required>
 		  <option>Zumba</option>
 		  <option>Zumba Gold</option>
 		</select>
       </div>
       <div class="form-group">
-        <label for="batch_date_time">Batch Date & Time</label>
-        <input type="datetime-local" name="batch_date_time" class="form-control" id="batch_date_time" placeholder="batch_date_time">
+        <label for="batchDateTime">Batch Date and Time</label>
+        <input type="datetime-local" name="batchDateTime" class="form-control" id="batchDateTime" placeholder="Batch Date and Time">
       </div>
       <br>
       <button type="submit" class="btn btn-default">Submit</button>

@@ -3,40 +3,27 @@
   <display-name>FunfitZumbaWebApplication</display-name>
   <welcome-file-list>
     <welcome-file>HomePage.html</welcome-file>
-    <welcome-file>AddBatch.html</welcome-file>
-    <welcome-file>AddParticipant.html</welcome-file>
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>AddBatchController</display-name>
-    <servlet-name>AddBatchController</servlet-name>
-    <servlet-class>com.funfit.controller.BatchController</servlet-class>
+    <display-name>BatchServlet</display-name>
+    <servlet-name>BatchServlet</servlet-name>
+    <servlet-class>com.funfit.controller.BatchServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AddBatchController</servlet-name>
-    <url-pattern>/AddBatchController</url-pattern>
-    <url-pattern>/addBatch</url-pattern>
+    <servlet-name>BatchServlet</servlet-name>
+    <url-pattern>/BatchServlet</url-pattern>
+    <url-pattern>/Batch</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>AddParticipantController</display-name>
-    <servlet-name>AddParticipantController</servlet-name>
-    <servlet-class>com.funfit.controller.ParticipantController</servlet-class>
+    <display-name>ParticipantServlet</display-name>
+    <servlet-name>ParticipantServlet</servlet-name>
+    <servlet-class>com.funfit.controller.ParticipantServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AddParticipantController</servlet-name>
-    <url-pattern>/AddParticipantController</url-pattern>
-    <url-pattern>/addParticipant</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>DeleteParticipantController</display-name>
-    <servlet-name>DeleteParticipantController</servlet-name>
-    <servlet-class>com.funfit.controller.DeleteParticipantController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DeleteParticipantController</servlet-name>
-    <url-pattern>/DeleteParticipantController</url-pattern>
-    <url-pattern>/DeleteParticipant</url-pattern>
+    <servlet-name>ParticipantServlet</servlet-name>
+    <url-pattern>/ParticipantServlet</url-pattern>
+    <url-pattern>/Participant</url-pattern>
   </servlet-mapping>
 </web-app>

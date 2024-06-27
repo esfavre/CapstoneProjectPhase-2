@@ -23,6 +23,7 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println(TAG + "Driver Loaded");
+			connectToDatabase();
 		} catch (Exception e) {
 			System.err.println("Exception Occured: " + e);
 		}
@@ -85,12 +86,11 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 	public int addParticipant(Participant participant){
 		int result = 0;
 		try {
-			String sql = "insert into Participant (name, phone, email, bid) values(?, ?, ?, ?)";
+			String sql = "insert into Participant (name, phone, email) values(?, ?, ?)";
 			preparedStatement = databaseConnection.prepareStatement(sql);
 			preparedStatement.setString(1, participant.getName());
 			preparedStatement.setString(2, participant.getPhone());
 			preparedStatement.setString(3, participant.getEmail());
-			preparedStatement.setInt(4, participant.getBid());
 			
 			result = preparedStatement.executeUpdate();
 			String message = "";
@@ -142,7 +142,8 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 	}
 
 	@Override
-	public void updateBatch(Batch batch){
+	public int updateBatch(Batch batch){
+		int result = 0;
 		try {
 			String sql = "update Batch set batch_group = ?, batch_name = ?, batch_date_time = ? where bid = ?";
 			System.out.println("SQL is: " + sql);
@@ -154,7 +155,7 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 			preparedStatement.setTimestamp(3, Timestamp.valueOf(batch.getBatch_Date_Time()));
 			preparedStatement.setInt(4, batch.getBid());
 			
-			int result = preparedStatement.executeUpdate();
+			result = preparedStatement.executeUpdate();
 			String message = "";
 			if(result > 0) {
 				message = "Batch Updated Successfully";
@@ -167,11 +168,12 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 		} catch (Exception e) {
 			System.err.println("Exception Occured: " + e);
 		}
-		
+		return result;
 	}
 
 	@Override
-	public void updateParticipant(Participant participant){
+	public int updateParticipant(Participant participant){
+		int result = 0;
 		try {
 			String sql = "update Participant set name = ? , phone = ? , email = ?, bid = ? where pid = ?";
 			
@@ -183,7 +185,7 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 			preparedStatement.setInt(4, participant.getBid());
 			preparedStatement.setInt(5, participant.getPid());
 			
-			int result = preparedStatement.executeUpdate();
+			result = preparedStatement.executeUpdate();
 			String message = "";
 			if(result > 0) {
 				message = "Participant Updated Successfully";
@@ -195,17 +197,18 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 		} catch (Exception e) {
 			System.err.println("Exception Occured: " + e);
 		}
-		
+		return result;
 	}
 	
 	@Override
-	public void deleteBatch(int bid){
+	public int deleteBatch(int bid){
+		int result = 0;
 		try {
 			String sql = "delete from Batch where bid = ?";
 			preparedStatement = databaseConnection.prepareStatement(sql);
 			preparedStatement.setInt(1, bid);
 			
-			int result = preparedStatement.executeUpdate();
+			result = preparedStatement.executeUpdate();
 			String message = "";
 			if(result > 0) {
 				message = "Batch Deleted Successfully";
@@ -217,16 +220,18 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 		} catch (Exception e) {
 			System.err.println("Exception Occured: " + e);
 		}
+		return result;
 	}
 
 	@Override
-	public void deleteParticipant(int pid){
+	public int deleteParticipant(int pid){
+		int result = 0;
 		try {
 			String sql = "delete from Participant where pid = ?";
 			preparedStatement = databaseConnection.prepareStatement(sql);
 			preparedStatement.setInt(1, pid);
 			
-			int result = preparedStatement.executeUpdate();
+			result = preparedStatement.executeUpdate();
 			String message = "";
 			if(result > 0) {
 				message = "Participant Deleted Successfully";
@@ -238,7 +243,7 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 		} catch (Exception e) {
 			System.err.println("Exception Occured: " + e);
 		}
-		
+		return result;
 	}
 	
 	
