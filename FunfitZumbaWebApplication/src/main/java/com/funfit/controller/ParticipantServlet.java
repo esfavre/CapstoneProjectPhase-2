@@ -1,6 +1,7 @@
 package com.funfit.controller;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -10,70 +11,26 @@ import java.io.PrintWriter;
 import com.funfit.dao.JdbcFunfitDao;
 import com.funfit.model.Participant;
 
-/**
- * Servlet implementation class ParticipantServlet
- */
+@WebServlet(urlPatterns = {"/DeleteParticipant"})
 public class ParticipantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     PrintWriter htmlWriter;   
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public ParticipantServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Participant participant = new Participant();
-		String participantName = request.getParameter("participantName");
-		String participantPhone = request.getParameter("participantPhone");
-		String participantEmail = request.getParameter("participantEmail");
-		
-		participant.setName(participantName);
-		participant.setPhone(participantPhone);
-		participant.setEmail(participantEmail);
-		
-		System.out.println("[Participant Servlet] Participant Details: " + participant);
-		JdbcFunfitDao dao = new JdbcFunfitDao();
-		int result = dao.addParticipant(participant);
-		dao.closeDatabaseConnection();
-		response.setContentType("text/html");
-		htmlWriter = response.getWriter();
-		addHead(request, response);
-		htmlWriter.print("<body>");
-		addNavBar(request, response);
-		String message = "";
-		
-		if(result > 0) {
-			message = "Participant " + participant.getName() + " was sucessfully added to the database.";
-		} else {
-			message = "Participant " + participant.getName() + " was not added to the database. Please try again.";
-		}
-		
-		addJumbotron(request, response, message);
-		addScript(request, response);
-		htmlWriter.print("</body>");
-	}
-
-	/**
-	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
-	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
-	/**
-	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-	 */
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		htmlWriter = response.getWriter();
 		addHead(request, response);
-		htmlWriter.print("<body");
+		htmlWriter.print("<body>");
 		addNavBar(request, response);
 		int pid = Integer.parseInt(request.getParameter("pid"));
 		JdbcFunfitDao dao = new JdbcFunfitDao();
@@ -100,7 +57,7 @@ public class ParticipantServlet extends HttpServlet {
 		htmlWriter.print("<meta name=\"author\" content=\"\">");
 		htmlWriter.print("<link rel=\"icon\" href=\"\">");
 		htmlWriter.print("<link rel=\"canonical\" href=\"https://getbootstrap.com/docs/3.4/examples/navbar/\">");
-		htmlWriter.print("<title>Funfit Zumba Batch</title>");
+		htmlWriter.print("<title>Delete Funfit Zumba Participant</title>");
 		htmlWriter.print("<link href=\"https://getbootstrap.com/docs/3.4/dist/css/bootstrap.min.css\" rel=\"stylesheet\">");
 		htmlWriter.print("<link href=\"https://getbootstrap.com/docs/3.4/assets/css/ie10-viewport-bug-workaround.css\" rel=\"stylesheet\">");
 		htmlWriter.print("<link href=\"navbar.css\" rel=\"stylesheet\">");
@@ -126,6 +83,7 @@ public class ParticipantServlet extends HttpServlet {
 		htmlWriter.print("</div>");
 		htmlWriter.print("<div id=\"navbar\" class=\"navbar-collapse collapse\">");
 		htmlWriter.print("<ul class=\"nav navbar-nav\">");
+		htmlWriter.print("<li class=\"nav-item\"><a href=\"BatchParticipants.jsp\">Batch Participants</a></li>");
 		htmlWriter.print("<li class=\"dropdown\">");
 		htmlWriter.print("<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Batches <span class=\"caret\"></span></a>");
 		htmlWriter.print("<ul class=\"dropdown-menu\">");
@@ -168,6 +126,9 @@ public class ParticipantServlet extends HttpServlet {
 		htmlWriter.print("&nbsp;");
 		htmlWriter.print("&nbsp;");
 		htmlWriter.print("<a class=\"btn btn-lg btn-primary\" href=\"Participants.jsp\" role=\"button\">Participants &raquo;</a>");
+		htmlWriter.print("&nbsp;");
+		htmlWriter.print("&nbsp;");
+		htmlWriter.print("<a class=\"btn btn-lg btn-primary\" href=\"BatchParticipants.jsp\" role=\"button\">Batch Participants &raquo;</a>");
 		htmlWriter.print("</p>");
 		htmlWriter.print("</div>");
 		

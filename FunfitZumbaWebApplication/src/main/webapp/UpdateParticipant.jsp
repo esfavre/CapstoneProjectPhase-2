@@ -19,7 +19,7 @@
     <link rel="icon" href="">
     <link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/navbar/">
 
-    <title>Funfit Zumba Admin Page</title>
+    <title>Funfit Zumba Update Participant</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/3.4/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -36,6 +36,7 @@
 
   </head>
 <body>
+
 <div class="container">
 
       <!-- Static navbar -->
@@ -71,69 +72,45 @@
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </nav>
-      
-  <h2 id="tables-hover-rows">List of Zumba Batches</h2>
-  <br>
-  <div class="bs-example" data-example-id="hoverable-table">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Batch</th>
-          <th>Batch Participant(s)</th>
-        </tr>
-      </thead>
-      <tbody>
-      	<%
-      	JdbcFunfitDao dao = new JdbcFunfitDao();
-      	List<Batch> batches = new ArrayList<Batch>();
-      	List<Participant> batchParticipants = new ArrayList<Participant>();
-      	batches = dao.getAllBatches();
-      	
-      	DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("E, MMM dd yyyy");
-		DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
-		String formatedDate = "";
-		String batchDescription = "";
-      	
-      	if(batches.size() > 0){
-   			for(Batch batch : batches){
-   				formatedDate = batch.getBatch_Date_Time().format(dateFormat) + " " + batch.getBatch_Date_Time().format(timeFormat);
-   				batchDescription = batch.getBatch_Group() + " " + batch.getBatch_Name() + " batch on " +  batch.getBatch_Date_Time().format(dateFormat) + " at " + batch.getBatch_Date_Time().format(timeFormat);
-   				batchParticipants = dao.findParticipantsByBatchId(batch.getBid());
-   				%>
-   				<tr>
-   				<th scope="row"><%= batchDescription %></th>
-   				<%
-   				if(batchParticipants.size() > 0){
-   					String participantNames = "";
-   					for(Participant participants : batchParticipants){
-   						participantNames += participants.getName() + "<br>";
-   					}
-   					%>
-   					<td><%= participantNames%></td>
-   					<%
-   				}else {
-   				
-   					%>
-   					<td>No Participants Assigned To This Batch</td>
-   					<%
-   				}
-   				%>			
-   				</tr> 
-   			<%
-   			}
-      	} else {
-			%>
-			<tr>
-				<td>No Batch Participants Present></td>
-			</tr>
-			
-		<% 
-		}%>
-      
-  </tbody>
-  </table>  
-  </div><!-- /example -->
-  <figure class="highlight"><pre>
+	<div class="jumbotron">
+        <h2>Update Participant</h2>
+        <%
+        int pid2Update = Integer.parseInt(request.getParameter("pid2Update"));
+        JdbcFunfitDao dao = new JdbcFunfitDao();
+       	Participant participant2Update = dao.findParticipantByPid(pid2Update);
+
+        String participantDescription =  "Participant #" + pid2Update + "<br>" + "Name: " + participant2Update.getName() + "<br>" + "Phone Number: " + participant2Update.getPhone() + "<br>" + "Email: " + participant2Update.getEmail() + "<br>" + "Batch ID: " + participant2Update.getBid();
+        %>
+        <h4><%= participantDescription %></h4>
+        <br>
+  <div class="bs-example" data-example-id="basic-forms">
+    <form action="updateParticipant" method="post">
+    <div class="form-group">
+    	<label for="pid2Update">Participant ID</label>
+    	<input type="text" name="pid2Update" class="form-control" id="pid2Update" value="<%= pid2Update %>" readonly>
+    </div>
+    <div class="form-group">
+        <label for="newParticipantName">Update Participant Name</label>
+        <input type="text" name="newParticipantName" class="form-control" id="newParticipantName" placeholder="New Participant Name" value="<%= participant2Update.getName() %>">
+      </div>
+   	  <div class="form-group">
+        <label for="newParticipantPhone">Update Participant Phone Number</label>
+        <input type="text" name="newParticipantPhone" class="form-control" id="newParticipantPhone" placeholder="New Participant Phone Number" value="<%= participant2Update.getPhone() %>">
+      </div>
+      <div class="form-group">
+        <label for="newParticipantEmail">Update Participant Email Address</label>
+        <input type="email" name="newParticipantEmail" class="form-control" id="newParticipantEmail" placeholder="New Participant Email" value="<%= participant2Update.getEmail() %>">
+      </div>
+      <div class="form-group">
+      	<label for="newParticipantBid">Update Participant Batch ID</label>
+      	<input type="text" name="newParticipantBid" class="form-control" id="newParticipantBid" placeholder="New Participant Bid" value="<%= participant2Update.getBid() %>">
+      </div>
+      <br>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+       </div>
+      </div>
+
   </div> <!-- /container -->
   <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>

@@ -1,55 +1,65 @@
 package com.funfit.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import com.funfit.dao.JdbcFunfitDao;
-import com.funfit.model.Batch;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
+
+import com.funfit.dao.JdbcFunfitDao;
+import com.funfit.model.Batch;
 
 /**
- * Servlet implementation class BatchServlet
+ * Servlet implementation class UpdateBatchServlet
  */
-@WebServlet(urlPatterns = {"/DeleteBatch"})
-public class BatchServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/updateBatch"})
+public class UpdateBatchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	PrintWriter htmlWriter;
        
-
-    public BatchServlet() {
+    PrintWriter htmlWriter;
+    public UpdateBatchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		response.setContentType("text/html");
 		htmlWriter = response.getWriter();
 		addHead(request, response);
 		htmlWriter.print("<body>");
 		addNavBar(request, response);
-		
-		int bid = Integer.parseInt(request.getParameter("bid"));
+		int bid2Update = Integer.parseInt(request.getParameter("bid2Update"));
+		String newBatchGroup = request.getParameter("newBatchGroup");
+		String newBatchName = request.getParameter("newBatchName");
+		String newBatchDateTime = request.getParameter("newBatchDateTime");
+		String message = ""; 
 		JdbcFunfitDao dao = new JdbcFunfitDao();
-		int result = dao.deleteBatch(bid);
-		String message = "";
+		
+		Batch batch2Update = dao.findBatchByBid(bid2Update);
+		
+		batch2Update.setBatch_Group(newBatchGroup);
+		batch2Update.setBatch_Name(newBatchName);
+		batch2Update.setBatch_Date_Time(LocalDateTime.parse(newBatchDateTime));
+		
+		int result = dao.updateBatch(batch2Update);
+		dao.closeDatabaseConnection();
+		
 		if(result > 0) {
-			message = "Batch Deleted Successfully.";
+			message = "Batch Updated Successfully.";
 		} else {
-			message = "Batch Not Deleted or Does Not Exist. Please Try Again";
+			message = "Batch Not Updated or Does Not Exist. Please Try Again";
 		}
 		addJumbotron(request, response, message);
 		addScript(request, response);
 		htmlWriter.print("</body>");
-	}
+		
+}
 	
 	protected void addHead(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		response.setContentType("text/html");
@@ -62,7 +72,7 @@ public class BatchServlet extends HttpServlet {
 		htmlWriter.print("<meta name=\"author\" content=\"\">");
 		htmlWriter.print("<link rel=\"icon\" href=\"\">");
 		htmlWriter.print("<link rel=\"canonical\" href=\"https://getbootstrap.com/docs/3.4/examples/navbar/\">");
-		htmlWriter.print("<title>Delete Funfit Zumba Batch</title>");
+		htmlWriter.print("<title>Update Funfit Zumba Batch</title>");
 		htmlWriter.print("<link href=\"https://getbootstrap.com/docs/3.4/dist/css/bootstrap.min.css\" rel=\"stylesheet\">");
 		htmlWriter.print("<link href=\"https://getbootstrap.com/docs/3.4/assets/css/ie10-viewport-bug-workaround.css\" rel=\"stylesheet\">");
 		htmlWriter.print("<link href=\"navbar.css\" rel=\"stylesheet\">");
@@ -149,4 +159,3 @@ public class BatchServlet extends HttpServlet {
 		htmlWriter.print("<script src=\"https://getbootstrap.com/docs/3.4/assets/js/ie10-viewport-bug-workaround.js\"></script>");
 	}
 }
-

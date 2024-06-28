@@ -1,5 +1,10 @@
 package com.funfit.controller;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
@@ -8,43 +13,43 @@ import java.time.format.DateTimeFormatter;
 import com.funfit.dao.JdbcFunfitDao;
 import com.funfit.model.Batch;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
-/**
- * Servlet implementation class BatchServlet
- */
-@WebServlet(urlPatterns = {"/DeleteBatch"})
-public class BatchServlet extends HttpServlet {
+@WebServlet("/addBatch")
+public class AddBatchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	PrintWriter htmlWriter;
-       
+       PrintWriter htmlWriter;
 
-    public BatchServlet() {
+    public AddBatchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Batch batch = new Batch();
+		String batchGroup = request.getParameter("batchGroup");
+		String batchName = request.getParameter("batchName");
+		String batchDateTime = request.getParameter("batchDateTime");
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("E, MMM dd yyyy");
+		DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
 		
+		batch.setBatch_Group(batchGroup);
+		batch.setBatch_Name(batchName);
+		batch.setBatch_Date_Time(LocalDateTime.parse(batchDateTime));
+		
+		//System.out.println("[Batch Servlet] Batch Details: " + batch);
+		JdbcFunfitDao dao = new JdbcFunfitDao();
+		int result = dao.addBatch(batch);
+		dao.closeDatabaseConnection();
 		response.setContentType("text/html");
 		htmlWriter = response.getWriter();
 		addHead(request, response);
 		htmlWriter.print("<body>");
 		addNavBar(request, response);
-		
-		int bid = Integer.parseInt(request.getParameter("bid"));
-		JdbcFunfitDao dao = new JdbcFunfitDao();
-		int result = dao.deleteBatch(bid);
 		String message = "";
 		if(result > 0) {
-			message = "Batch Deleted Successfully.";
+			message = batch.getBatch_Group() + " " + batch.getBatch_Name() + " batch on " +  batch.getBatch_Date_Time().format(dateFormat) + " at " + batch.getBatch_Date_Time().format(timeFormat) + " was successfully added to the database.";
 		} else {
-			message = "Batch Not Deleted or Does Not Exist. Please Try Again";
+			message = batch.getBatch_Group() + " " + batch.getBatch_Name() + " batch at " +  batch.getBatch_Date_Time().format(dateFormat) + " at " + batch.getBatch_Date_Time().format(timeFormat) + " was not added to the database. Please try again";
 		}
 		addJumbotron(request, response, message);
 		addScript(request, response);
@@ -62,7 +67,7 @@ public class BatchServlet extends HttpServlet {
 		htmlWriter.print("<meta name=\"author\" content=\"\">");
 		htmlWriter.print("<link rel=\"icon\" href=\"\">");
 		htmlWriter.print("<link rel=\"canonical\" href=\"https://getbootstrap.com/docs/3.4/examples/navbar/\">");
-		htmlWriter.print("<title>Delete Funfit Zumba Batch</title>");
+		htmlWriter.print("<title>Add Funfit Zumba Batch</title>");
 		htmlWriter.print("<link href=\"https://getbootstrap.com/docs/3.4/dist/css/bootstrap.min.css\" rel=\"stylesheet\">");
 		htmlWriter.print("<link href=\"https://getbootstrap.com/docs/3.4/assets/css/ie10-viewport-bug-workaround.css\" rel=\"stylesheet\">");
 		htmlWriter.print("<link href=\"navbar.css\" rel=\"stylesheet\">");

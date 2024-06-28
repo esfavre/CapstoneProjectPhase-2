@@ -1,55 +1,69 @@
 package com.funfit.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import com.funfit.dao.JdbcFunfitDao;
-import com.funfit.model.Batch;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import com.funfit.dao.JdbcFunfitDao;
+import com.funfit.model.Participant;
 
 /**
- * Servlet implementation class BatchServlet
+ * Servlet implementation class UpdateParticipantServlet
  */
-@WebServlet(urlPatterns = {"/DeleteBatch"})
-public class BatchServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/updateParticipant"})
+public class UpdateParticipantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	PrintWriter htmlWriter;
-       
-
-    public BatchServlet() {
+      PrintWriter htmlWriter;
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public UpdateParticipantServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		response.setContentType("text/html");
 		htmlWriter = response.getWriter();
 		addHead(request, response);
 		htmlWriter.print("<body>");
 		addNavBar(request, response);
+		int pid2Update = Integer.parseInt(request.getParameter("pid2Update"));
+		String newParticipantName = request.getParameter("newParticipantName");
+		String newParticipantPhone = request.getParameter("newParticipantPhone");
+		String newParticipantEmail = request.getParameter("newParticipantEmail");
+		int newParticipantBid = Integer.parseInt(request.getParameter("newParticipantBid"));
 		
-		int bid = Integer.parseInt(request.getParameter("bid"));
+		String message = ""; 
 		JdbcFunfitDao dao = new JdbcFunfitDao();
-		int result = dao.deleteBatch(bid);
-		String message = "";
+		
+		Participant participant2Update = dao.findParticipantByPid(pid2Update);
+		
+		participant2Update.setName(newParticipantName);
+		participant2Update.setPhone(newParticipantPhone);
+		participant2Update.setEmail(newParticipantEmail);
+		participant2Update.setBid(newParticipantBid);
+		
+		int result = dao.updateParticipant(participant2Update);
+		dao.closeDatabaseConnection();
+		
 		if(result > 0) {
-			message = "Batch Deleted Successfully.";
+			message = "Participant Updated Successfully.";
 		} else {
-			message = "Batch Not Deleted or Does Not Exist. Please Try Again";
+			message = "Participant Not Updated or Does Not Exist. Please Try Again";
 		}
 		addJumbotron(request, response, message);
 		addScript(request, response);
 		htmlWriter.print("</body>");
 	}
+
 	
 	protected void addHead(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		response.setContentType("text/html");
@@ -62,7 +76,7 @@ public class BatchServlet extends HttpServlet {
 		htmlWriter.print("<meta name=\"author\" content=\"\">");
 		htmlWriter.print("<link rel=\"icon\" href=\"\">");
 		htmlWriter.print("<link rel=\"canonical\" href=\"https://getbootstrap.com/docs/3.4/examples/navbar/\">");
-		htmlWriter.print("<title>Delete Funfit Zumba Batch</title>");
+		htmlWriter.print("<title>Update Funfit Zumba Participant</title>");
 		htmlWriter.print("<link href=\"https://getbootstrap.com/docs/3.4/dist/css/bootstrap.min.css\" rel=\"stylesheet\">");
 		htmlWriter.print("<link href=\"https://getbootstrap.com/docs/3.4/assets/css/ie10-viewport-bug-workaround.css\" rel=\"stylesheet\">");
 		htmlWriter.print("<link href=\"navbar.css\" rel=\"stylesheet\">");
@@ -149,4 +163,3 @@ public class BatchServlet extends HttpServlet {
 		htmlWriter.print("<script src=\"https://getbootstrap.com/docs/3.4/assets/js/ie10-viewport-bug-workaround.js\"></script>");
 	}
 }
-

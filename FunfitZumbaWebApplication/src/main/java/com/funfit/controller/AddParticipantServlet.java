@@ -1,50 +1,55 @@
 package com.funfit.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import com.funfit.dao.JdbcFunfitDao;
-import com.funfit.model.Batch;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
-/**
- * Servlet implementation class BatchServlet
- */
-@WebServlet(urlPatterns = {"/DeleteBatch"})
-public class BatchServlet extends HttpServlet {
+import com.funfit.dao.JdbcFunfitDao;
+import com.funfit.model.Participant;
+
+@WebServlet("/addParticipant")
+public class AddParticipantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	PrintWriter htmlWriter;
-       
-
-    public BatchServlet() {
+     PrintWriter htmlWriter; 
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public AddParticipantServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Participant participant = new Participant();
+		String participantName = request.getParameter("participantName");
+		String participantPhone = request.getParameter("participantPhone");
+		String participantEmail = request.getParameter("participantEmail");
 		
+		participant.setName(participantName);
+		participant.setPhone(participantPhone);
+		participant.setEmail(participantEmail);
+		
+		//System.out.println("[Participant Servlet] Participant Details: " + participant);
+		JdbcFunfitDao dao = new JdbcFunfitDao();
+		int result = dao.addParticipant(participant);
+		dao.closeDatabaseConnection();
 		response.setContentType("text/html");
 		htmlWriter = response.getWriter();
 		addHead(request, response);
 		htmlWriter.print("<body>");
 		addNavBar(request, response);
-		
-		int bid = Integer.parseInt(request.getParameter("bid"));
-		JdbcFunfitDao dao = new JdbcFunfitDao();
-		int result = dao.deleteBatch(bid);
 		String message = "";
 		if(result > 0) {
-			message = "Batch Deleted Successfully.";
+			message = "Participant " + participant.getName() + " was sucessfully added to the database.";
 		} else {
-			message = "Batch Not Deleted or Does Not Exist. Please Try Again";
+			message = "Participant " + participant.getName() + " was not added to the database. Please try again.";
 		}
 		addJumbotron(request, response, message);
 		addScript(request, response);
@@ -62,7 +67,7 @@ public class BatchServlet extends HttpServlet {
 		htmlWriter.print("<meta name=\"author\" content=\"\">");
 		htmlWriter.print("<link rel=\"icon\" href=\"\">");
 		htmlWriter.print("<link rel=\"canonical\" href=\"https://getbootstrap.com/docs/3.4/examples/navbar/\">");
-		htmlWriter.print("<title>Delete Funfit Zumba Batch</title>");
+		htmlWriter.print("<title>Add Funfit Zumba Participant</title>");
 		htmlWriter.print("<link href=\"https://getbootstrap.com/docs/3.4/dist/css/bootstrap.min.css\" rel=\"stylesheet\">");
 		htmlWriter.print("<link href=\"https://getbootstrap.com/docs/3.4/assets/css/ie10-viewport-bug-workaround.css\" rel=\"stylesheet\">");
 		htmlWriter.print("<link href=\"navbar.css\" rel=\"stylesheet\">");
@@ -149,4 +154,3 @@ public class BatchServlet extends HttpServlet {
 		htmlWriter.print("<script src=\"https://getbootstrap.com/docs/3.4/assets/js/ie10-viewport-bug-workaround.js\"></script>");
 	}
 }
-

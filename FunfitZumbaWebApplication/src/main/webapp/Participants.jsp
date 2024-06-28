@@ -56,7 +56,7 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              
+              <li class="nav-item"><a href="BatchParticipants.jsp">Batch Participants</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Batches <span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -108,7 +108,7 @@
    				<td><%= participant.getPhone() %></td>
    				<td><%= participant.getEmail() %></td>
    				<td><%= participant.getBid() %></td>
-   				<td><a href="Delete?id=<%participant.getPid(); %>">DELETE</a> | <a href="Update">UPDATE</a></td>
+   				<td><a href="DeleteParticipant?pid=<%= participant.getPid() %>">DELETE</a> | <a href="UpdateParticipant.jsp?pid2Update=<%= participant.getPid() %>">UPDATE</a></td>
    				</tr> 
    				
    				<%

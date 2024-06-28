@@ -19,7 +19,7 @@
     <link rel="icon" href="">
     <link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/navbar/">
 
-    <title>Funfit Zumba Admin Page</title>
+    <title>Funfit Zumba Update Batch</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/3.4/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -36,6 +36,7 @@
 
   </head>
 <body>
+
 <div class="container">
 
       <!-- Static navbar -->
@@ -71,69 +72,64 @@
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </nav>
-      
-  <h2 id="tables-hover-rows">List of Zumba Batches</h2>
-  <br>
-  <div class="bs-example" data-example-id="hoverable-table">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Batch</th>
-          <th>Batch Participant(s)</th>
-        </tr>
-      </thead>
-      <tbody>
-      	<%
-      	JdbcFunfitDao dao = new JdbcFunfitDao();
-      	List<Batch> batches = new ArrayList<Batch>();
-      	List<Participant> batchParticipants = new ArrayList<Participant>();
-      	batches = dao.getAllBatches();
-      	
-      	DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("E, MMM dd yyyy");
+	<div class="jumbotron">
+        <h2>Update Batch</h2>
+        <%
+        int bid2Update = Integer.parseInt(request.getParameter("bid2Update"));
+        JdbcFunfitDao dao = new JdbcFunfitDao();
+        Batch batch2Update = dao.findBatchByBid(bid2Update);
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("E, MMM dd yyyy");
 		DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
-		String formatedDate = "";
-		String batchDescription = "";
-      	
-      	if(batches.size() > 0){
-   			for(Batch batch : batches){
-   				formatedDate = batch.getBatch_Date_Time().format(dateFormat) + " " + batch.getBatch_Date_Time().format(timeFormat);
-   				batchDescription = batch.getBatch_Group() + " " + batch.getBatch_Name() + " batch on " +  batch.getBatch_Date_Time().format(dateFormat) + " at " + batch.getBatch_Date_Time().format(timeFormat);
-   				batchParticipants = dao.findParticipantsByBatchId(batch.getBid());
-   				%>
-   				<tr>
-   				<th scope="row"><%= batchDescription %></th>
-   				<%
-   				if(batchParticipants.size() > 0){
-   					String participantNames = "";
-   					for(Participant participants : batchParticipants){
-   						participantNames += participants.getName() + "<br>";
-   					}
-   					%>
-   					<td><%= participantNames%></td>
-   					<%
-   				}else {
-   				
-   					%>
-   					<td>No Participants Assigned To This Batch</td>
-   					<%
-   				}
-   				%>			
-   				</tr> 
-   			<%
-   			}
-      	} else {
-			%>
-			<tr>
-				<td>No Batch Participants Present></td>
-			</tr>
-			
-		<% 
-		}%>
-      
-  </tbody>
-  </table>  
-  </div><!-- /example -->
-  <figure class="highlight"><pre>
+		String selectedM = "";
+		String selectedE = "";
+		String selectedZ = "";
+		String selectedZG = "";
+		
+		if(batch2Update.getBatch_Group().equals("Morning")){
+			selectedM = "selected";
+		} else {
+			selectedE ="selected";
+		}
+		
+		if(batch2Update.getBatch_Name().equals("Zumba")){
+			selectedZ = "selected";
+		}else {
+			selectedZG ="selected";
+		}
+        String batchDescription =  "Batch #" + bid2Update + " " + batch2Update.getBatch_Group() + " " + batch2Update.getBatch_Name() + " on " +  batch2Update.getBatch_Date_Time().format(dateFormat) + " at " + batch2Update.getBatch_Date_Time().format(timeFormat);
+        %>
+        <h3><%= batchDescription %></h3>
+        <br>
+  <div class="bs-example" data-example-id="basic-forms">
+    <form action="updateBatch" method="post">
+    <div class="form-group">
+    	<label for="bid2Update">Batch ID</label>
+    	<input type="text" name="bid2Update" class="form-control" id="bid2Update" value="<%= bid2Update %>" readonly>
+    </div>
+   	  <div class="form-group">
+        <label for="newBatchGroup">Update Batch Group</label>
+        <select class="form-control" name="newBatchGroup" required>
+		  <option <%= selectedM %>>Morning</option>
+		  <option <%= selectedE %>>Evening</option>
+		</select>
+      </div>
+      <div class="form-group">
+        <label for="batchName">Update Batch Name</label>
+        <select class="form-control" name="newBatchName" required>
+		  <option <%= selectedZ %>>Zumba</option>
+		  <option <%= selectedZG %>>Zumba Gold</option>
+		</select>
+      </div>
+      <div class="form-group">
+        <label for="batchDateTime">Update Batch Date and Time</label>
+        <input type="datetime-local" name="newBatchDateTime" class="form-control" id="batchDateTime" value="<%= batch2Update.getBatch_Date_Time() %>">
+      </div>
+      <br>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+       </div>
+      </div>
+
   </div> <!-- /container -->
   <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>

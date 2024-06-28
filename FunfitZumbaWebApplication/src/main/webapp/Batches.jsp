@@ -34,11 +34,6 @@
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="https://getbootstrap.com/docs/3.4/assets/js/ie-emulation-modes-warning.js"></script>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-    <![endif]-->
   </head>
 <body>
 
@@ -58,7 +53,7 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              
+              <li class="nav-item"><a href="BatchParticipants.jsp">Batch Participants</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Batches<span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -109,7 +104,7 @@
    				<td><%= batch.getBatch_Group() %></td>
    				<td><%= batch.getBatch_Name() %></td>
    				<td><%= formatedDate %></td>
-   				<td><a href="DeleteBatch?id=<%= batch.getBid() %>">DELETE</a> | <a href="Update">UPDATE</a></td>
+   				<td><a href="DeleteBatch?bid=<%= batch.getBid() %>">DELETE</a> | <a href="UpdateBatch.jsp?bid2Update=<%= batch.getBid() %>">UPDATE</a></td>
    				</tr> 
    				
    			<%

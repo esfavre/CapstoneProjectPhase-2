@@ -17,12 +17,12 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 	private static Connection databaseConnection;
 	PreparedStatement preparedStatement;
 	
-	final String TAG = "[" + getClass().getSimpleName() + "]";
+	//final String TAG = "[" + getClass().getSimpleName() + "]";
 	
 	public JdbcFunfitDao(){
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			System.out.println(TAG + "Driver Loaded");
+			//System.out.println(TAG + "Driver Loaded");
 			connectToDatabase();
 		} catch (Exception e) {
 			System.err.println("Exception Occured: " + e);
@@ -36,7 +36,7 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 			String user = "funfitadmin";
 			String password = "mid-SUAVE2";
 			databaseConnection = DriverManager.getConnection(url, user, password);
-			System.out.println("Connection to the Funfit Database Created");
+			//System.out.println("Connection to the Funfit Database Created");
 			} catch (Exception e) {
 				System.err.println("Exception Occured: " + e);
 		}
@@ -47,7 +47,7 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 		if (databaseConnection != null) {
 			try {
 				databaseConnection.close();
-				System.out.println(TAG + "Connection to the Funfit Database Closed. Closed Status: " + databaseConnection.isClosed());
+				//System.out.println(TAG + "Connection to the Funfit Database Closed. Closed Status: " + databaseConnection.isClosed());
 			} catch (Exception e) {
 				System.err.println("Exception Occured: " + e);
 			}
@@ -67,14 +67,14 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 			preparedStatement.setTimestamp(3, Timestamp.valueOf(batch.getBatch_Date_Time()));
 			
 			result = preparedStatement.executeUpdate();
-			String message = "";
-			if(result > 0) {
-				message = "Batch Added Successfully";
-				System.out.println(TAG + message);
-			} else {
-				message = "Batch Not Added Please Try Again";
-				System.err.println(TAG + message);
-			}
+//			String message = "";
+//			if(result > 0) {
+//				message = "Batch Added Successfully";
+//				//System.out.println(TAG + message);
+//			} else {
+//				message = "Batch Not Added Please Try Again";
+//				//System.err.println(TAG + message);
+//			}
 		} catch (Exception e) {
 			System.err.println("Exception Occured: " + e);
 		}
@@ -93,14 +93,14 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 			preparedStatement.setString(3, participant.getEmail());
 			
 			result = preparedStatement.executeUpdate();
-			String message = "";
-			if(result > 0) {
-				message = "Participant Added Successfully";
-				System.out.println(TAG + message);
-			} else {
-				message = "Participant Not Added. Please Try Again";
-				System.err.println(TAG + message);
-			}
+//			String message = "";
+//			if(result > 0) {
+//				message = "Participant Added Successfully";
+//				System.out.println(TAG + message);
+//			} else {
+//				message = "Participant Not Added. Please Try Again";
+//				System.err.println(TAG + message);
+//			}
 		} catch (Exception e) {
 			System.err.println("Exception Occured: " + e);
 		}	
@@ -156,14 +156,14 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 			preparedStatement.setInt(4, batch.getBid());
 			
 			result = preparedStatement.executeUpdate();
-			String message = "";
-			if(result > 0) {
-				message = "Batch Updated Successfully";
-				System.out.println(TAG + message);
-			} else {
-				message = "Batch Not Updated. Please Try Again";
-				System.err.println(TAG + message);
-			}
+//			String message = "";
+//			if(result > 0) {
+//				message = "Batch Updated Successfully";
+//				System.out.println(TAG + message);
+//			} else {
+//				message = "Batch Not Updated. Please Try Again";
+//				System.err.println(TAG + message);
+//			}
 			
 		} catch (Exception e) {
 			System.err.println("Exception Occured: " + e);
@@ -186,14 +186,14 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 			preparedStatement.setInt(5, participant.getPid());
 			
 			result = preparedStatement.executeUpdate();
-			String message = "";
-			if(result > 0) {
-				message = "Participant Updated Successfully";
-				System.out.println(TAG + message);
-			} else {
-				message = "Participant Not Updated. Please Try Again";
-				System.err.println(TAG + message);
-			}
+//			String message = "";
+//			if(result > 0) {
+//				message = "Participant Updated Successfully";
+//				System.out.println(TAG + message);
+//			} else {
+//				message = "Participant Not Updated. Please Try Again";
+//				System.err.println(TAG + message);
+//			}
 		} catch (Exception e) {
 			System.err.println("Exception Occured: " + e);
 		}
@@ -209,14 +209,14 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 			preparedStatement.setInt(1, bid);
 			
 			result = preparedStatement.executeUpdate();
-			String message = "";
-			if(result > 0) {
-				message = "Batch Deleted Successfully";
-				System.out.println(TAG + message);
-			} else {
-				message = "Batch Not Deleted. Please Try Again";
-				System.err.println(TAG + message);
-			}
+//			String message = "";
+//			if(result > 0) {
+//				message = "Batch Deleted Successfully";
+//				System.out.println(TAG + message);
+//			} else {
+//				message = "Batch Not Deleted. Please Try Again";
+//				System.err.println(TAG + message);
+//			}
 		} catch (Exception e) {
 			System.err.println("Exception Occured: " + e);
 		}
@@ -232,14 +232,14 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 			preparedStatement.setInt(1, pid);
 			
 			result = preparedStatement.executeUpdate();
-			String message = "";
-			if(result > 0) {
-				message = "Participant Deleted Successfully";
-				System.out.println(TAG + message);
-			} else {
-				message = "Participant Not Deleted. Please Try Again";
-				System.err.println(TAG + message);
-			}
+//			String message = "";
+//			if(result > 0) {
+//				message = "Participant Deleted Successfully";
+//				System.out.println(TAG + message);
+//			} else {
+//				message = "Participant Not Deleted. Please Try Again";
+//				System.err.println(TAG + message);
+//			}
 		} catch (Exception e) {
 			System.err.println("Exception Occured: " + e);
 		}
@@ -247,121 +247,64 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 	}
 	
 	
-//	@Override
-//	public Batch findBatchByBid(int bid) throws SQLException {
-//		
-//		String sql = "select * from Batch where bid = ?";
-//		preparedStatement = databaseConnection.prepareStatement(sql);
-//		
-//		preparedStatement.setInt(1, bid);
-//		
-//		ResultSet aBatchRow = preparedStatement.executeQuery();
-//		
-//		Batch aBatch = new Batch();
-//		
-//		if(aBatchRow.next()) {
-//			aBatch = MapRowToBatch(aBatchRow);
-//		}
-//		return aBatch;
-//	}
-//
-//	@Override
-//	public Participant findParticipantByPid(int pid) throws SQLException {
-//		
-//		String sql = "select * from Participant where pid = ?";
-//		preparedStatement = databaseConnection.prepareStatement(sql);
-//		
-//		preparedStatement.setInt(1, pid);
-//		
-//		ResultSet aParticipantRow = preparedStatement.executeQuery();
-//		
-//		Participant aParticipant = new Participant();
-//		
-//		if(aParticipantRow.next()) {
-//			aParticipant = MapRowToParticipant(aParticipantRow);
-//		}
-//		return aParticipant;
-//	}
-//
-//	@Override
-//	public List<Batch> findBatchByGroup(String batch_group) throws SQLException {
-//		
-//		List<Batch> batchesFound = new ArrayList<Batch>();
-//		
-//		String sql = "select * from Batch where batch_group like ?";
-//		String likeSqlString = "%" + batch_group + "%";
-//		preparedStatement = databaseConnection.prepareStatement(sql);
-//		
-//		preparedStatement.setString(1, likeSqlString);
-//		
-//		ResultSet rowsFromDataBase = preparedStatement.executeQuery();
-//		
-//		while(rowsFromDataBase.next()) {
-//			batchesFound.add(MapRowToBatch(rowsFromDataBase));
-//		}
-//		
-//		return batchesFound;
-//	}
-//
-//	@Override
-//	public List<Batch> findBatchByName(String batch_name) throws SQLException {
-//		
-//		List<Batch> batchesFound = new ArrayList<Batch>();
-//				
-//			String sql = "select * from Batch where batch_name like ?";
-//			String likeSqlString = "%" + batch_name + "%";
-//			preparedStatement = databaseConnection.prepareStatement(sql);
-//			
-//			preparedStatement.setString(1, likeSqlString);
-//			
-//			ResultSet rowsFromDataBase = preparedStatement.executeQuery();
-//			
-//			while(rowsFromDataBase.next()) {
-//				batchesFound.add(MapRowToBatch(rowsFromDataBase));
-//			}
-//			
-//			return batchesFound;
-//		
-//	}
-//
-//	@Override
-//	public List<Participant> findParticipantsByName(String name) throws SQLException {
-//		
-//		List<Participant> participantsFound = new ArrayList<Participant>();
-//		
-//		String sql = "select * from Batch where name like ?";
-//		String likeSqlString = "%" + name + "%";
-//		preparedStatement = databaseConnection.prepareStatement(sql);
-//		
-//		preparedStatement.setString(1, likeSqlString);
-//		
-//		ResultSet rowsFromDataBase = preparedStatement.executeQuery();
-//		
-//		while(rowsFromDataBase.next()) {
-//			participantsFound.add(MapRowToParticipant(rowsFromDataBase));
-//		}
-//		
-//		return participantsFound;
-//	}
-//
-//	@Override
-//	public List<Participant> findParticipantsByBatchId(int bid) throws SQLException {
-//		
-//		List<Participant> participantsFound = new ArrayList<Participant>();
-//		
-//		String sql = "select * from Participant where bid = ?";
-//		preparedStatement = databaseConnection.prepareStatement(sql);
-//		
-//		preparedStatement.setInt(1, bid);
-//		
-//		ResultSet rowsFromDataBase = preparedStatement.executeQuery();
-//	
-//		
-//		if(rowsFromDataBase.next()) {
-//			participantsFound.add(MapRowToParticipant(rowsFromDataBase));
-//		}
-//		return participantsFound;
-//	}
+	@Override
+	public Batch findBatchByBid(int bid){
+		Batch aBatch = null;
+		try {
+			
+			String sql = "select * from Batch where bid = ?";
+			preparedStatement = databaseConnection.prepareStatement(sql);
+			preparedStatement.setInt(1, bid);
+			ResultSet aBatchRow = preparedStatement.executeQuery();
+			
+			if(aBatchRow.next()) {
+				aBatch = MapRowToBatch(aBatchRow);
+			}
+		} catch (Exception e) {
+			System.err.println("Exception Occured: " + e);
+		}
+		
+		return aBatch;
+	}
+
+	@Override
+	public Participant findParticipantByPid(int pid){
+		Participant aParticipant = null;
+		try {
+			String sql = "select * from Participant where pid = ?";
+			preparedStatement = databaseConnection.prepareStatement(sql);
+			preparedStatement.setInt(1, pid);
+			ResultSet aParticipantRow = preparedStatement.executeQuery();
+			
+			if(aParticipantRow.next()) {
+				aParticipant = MapRowToParticipant(aParticipantRow);
+			}
+		} catch (Exception e) {
+			System.err.println("Exception Occured: " + e);
+		}
+		
+		return aParticipant;
+	}
+
+	@Override
+	public List<Participant> findParticipantsByBatchId(int bid){
+		List<Participant> participantsFound = new ArrayList<Participant>();
+		try {
+			String sql = "select * from Participant where bid = ?";
+			preparedStatement = databaseConnection.prepareStatement(sql);
+			preparedStatement.setInt(1, bid);
+			ResultSet rowsFromDataBase = preparedStatement.executeQuery();
+			
+			while(rowsFromDataBase.next()) {
+				participantsFound.add(MapRowToParticipant(rowsFromDataBase));
+			}
+			
+		} catch (Exception e) {
+			System.err.println("Exception Occured: " + e);
+		}
+		
+		return participantsFound;
+	}
 
 	private Batch MapRowToBatch(ResultSet aRow){
 			
@@ -380,8 +323,6 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 		
 	}
 
-	
-	
 	private Participant MapRowToParticipant(ResultSet aRow){
 		
 		Participant aParticipant = new Participant();
@@ -398,11 +339,6 @@ public class JdbcFunfitDao implements FunfitDaoInterface{
 		
 		
 	}
-	
-	
-	
-	
 
-	
 
 }

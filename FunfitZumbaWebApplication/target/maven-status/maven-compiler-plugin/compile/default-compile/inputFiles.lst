@@ -1,10 +1,11 @@
+C:\Users\Elena Favre\OneDrive\Documents\GitHub\CapstoneProjectPhase-2\FunfitZumbaWebApplication\src\main\java\com\funfit\app\FunfitZumbaApp.java
 C:\Users\Elena Favre\OneDrive\Documents\GitHub\CapstoneProjectPhase-2\FunfitZumbaWebApplication\src\main\java\com\funfit\dao\FunfitDaoInterface.java
-C:\Users\Elena Favre\OneDrive\Documents\GitHub\CapstoneProjectPhase-2\FunfitZumbaWebApplication\src\main\java\com\funfit\controller\AddParticipantController.java
-C:\Users\Elena Favre\OneDrive\Documents\GitHub\CapstoneProjectPhase-2\FunfitZumbaWebApplication\src\main\java\com\funfit\exceptions\DataBaseDeleteException.java
-C:\Users\Elena Favre\OneDrive\Documents\GitHub\CapstoneProjectPhase-2\FunfitZumbaWebApplication\src\main\java\com\funfit\exceptions\DataBaseInsertException.java
+C:\Users\Elena Favre\OneDrive\Documents\GitHub\CapstoneProjectPhase-2\FunfitZumbaWebApplication\src\main\java\com\funfit\controller\AddParticipantServlet.java
+C:\Users\Elena Favre\OneDrive\Documents\GitHub\CapstoneProjectPhase-2\FunfitZumbaWebApplication\src\main\java\com\funfit\controller\UpdateBatchServlet.java
+C:\Users\Elena Favre\OneDrive\Documents\GitHub\CapstoneProjectPhase-2\FunfitZumbaWebApplication\src\main\java\com\funfit\controller\ParticipantServlet.java
+C:\Users\Elena Favre\OneDrive\Documents\GitHub\CapstoneProjectPhase-2\FunfitZumbaWebApplication\src\main\java\com\funfit\controller\UpdateParticipantServlet.java
 C:\Users\Elena Favre\OneDrive\Documents\GitHub\CapstoneProjectPhase-2\FunfitZumbaWebApplication\src\main\java\com\funfit\model\Participant.java
-C:\Users\Elena Favre\OneDrive\Documents\GitHub\CapstoneProjectPhase-2\FunfitZumbaWebApplication\src\main\java\com\funfit\controller\DeleteParticipantController.java
-C:\Users\Elena Favre\OneDrive\Documents\GitHub\CapstoneProjectPhase-2\FunfitZumbaWebApplication\src\main\java\com\funfit\exceptions\DataBaseUpdateException.java
+C:\Users\Elena Favre\OneDrive\Documents\GitHub\CapstoneProjectPhase-2\FunfitZumbaWebApplication\src\main\java\com\funfit\controller\AddBatchServlet.java
+C:\Users\Elena Favre\OneDrive\Documents\GitHub\CapstoneProjectPhase-2\FunfitZumbaWebApplication\src\main\java\com\funfit\controller\BatchServlet.java
 C:\Users\Elena Favre\OneDrive\Documents\GitHub\CapstoneProjectPhase-2\FunfitZumbaWebApplication\src\main\java\com\funfit\dao\JdbcFunfitDao.java
 C:\Users\Elena Favre\OneDrive\Documents\GitHub\CapstoneProjectPhase-2\FunfitZumbaWebApplication\src\main\java\com\funfit\model\Batch.java
-C:\Users\Elena Favre\OneDrive\Documents\GitHub\CapstoneProjectPhase-2\FunfitZumbaWebApplication\src\main\java\com\funfit\controller\AddBatchController.java

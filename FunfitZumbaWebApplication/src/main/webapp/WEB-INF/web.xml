@@ -26,4 +26,48 @@
     <url-pattern>/ParticipantServlet</url-pattern>
     <url-pattern>/Participant</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddBatchServlet</display-name>
+    <servlet-name>AddBatchServlet</servlet-name>
+    <servlet-class>com.funfit.controller.AddBatchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddBatchServlet</servlet-name>
+    <url-pattern>/AddBatchServlet</url-pattern>
+    <url-pattern>/AddBatch</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddParticipantServlet</display-name>
+    <servlet-name>AddParticipantServlet</servlet-name>
+    <servlet-class>com.funfit.controller.AddParticipantServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddParticipantServlet</servlet-name>
+    <url-pattern>/AddParticipantServlet</url-pattern>
+    <url-pattern>/AddParticipant</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateBatchServlet</display-name>
+    <servlet-name>UpdateBatchServlet</servlet-name>
+    <servlet-class>com.funfit.controller.UpdateBatchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateBatchServlet</servlet-name>
+    <url-pattern>/UpdateBatchServlet</url-pattern>
+    <url-pattern>/UpdateBatch</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateParticipantServlet</display-name>
+    <servlet-name>UpdateParticipantServlet</servlet-name>
+    <servlet-class>com.funfit.controller.UpdateParticipantServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateParticipantServlet</servlet-name>
+    <url-pattern>/UpdateParticipantServlet</url-pattern>
+    <url-pattern>/UpdateParticipant</url-pattern>
+  </servlet-mapping>
 </web-app>

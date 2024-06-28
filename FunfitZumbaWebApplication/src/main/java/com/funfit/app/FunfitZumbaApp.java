@@ -16,18 +16,18 @@
 //		
 //		Batch batch = new Batch();
 //		Participant participant = new Participant();
-//	
-//		batch.setBid(9);
+	
+		//batch.setBid(9);
 //		batch.setBatch_Group("Evening");
 //		batch.setBatch_Name("Zumba");
 //		batch.setBatch_Date_Time(LocalDateTime.of(2024, Month.JUNE, 22, 20, 0, 0));
-//		
-//		participant.setPid(8);
+		
+		//participant.setPid(8);
 //		participant.setName("Rei de Suave Ganondorf");
 //		participant.setPhone("555-478-5820");
 //		participant.setEmail("reidesuave@calamity.com");
-//		participant.setBid(6);
-//		
+		//participant.setBid(3);
+		
 //		System.out.println("Connecting to Funfit Database.....");
 //		JdbcFunfitDao dao = new JdbcFunfitDao();
 //		dao.connectToDatabase();
@@ -37,14 +37,16 @@
 //		dao.updateParticipant(participant);
 //		List<Batch> batches = dao.getAllBatches();
 //		List<Participant> participants = dao.getAllParticipants();
+//		List<Participant> batchParticipants = dao.findParticipantsByBatchId(3);
+//		batchParticipants.forEach(bpRef -> System.out.println(bpRef.getName()));
 //		batches.forEach(bRef -> System.out.println(bRef));
 //		participants.forEach(pRef -> System.out.println(pRef));
 //		dao.deleteBatch(9);
 //		dao.deleteParticipant(8);
-//		
-//		
+		
+		
 //		dao.closeDatabaseConnection();
-//
+
 //	}
 //
 //}
